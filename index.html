@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+</head>
+
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl" ng-init="size=12; price=10">
+    <p>{{firstName}}</p>
+    <p>Size of the Pizza:</p>
+    <p>Size:  <input type="text" ng-model="size" value="size"></p>
+    <p>Price: <input type="text" ng-model="price" value="price"></p>
+
+    <p>Area: {{ Math.pow(5 ,2) * Math.PI }}</p>
+    <p>Cost Per sqare inch </p> {{price / (Math.pow(5 ,2) * Math.PI ) }}
+
+</div>
+
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("myCtrl", function($scope) {
+        $scope.Math = window.Math
+    });
+</script>
+
+
+</body>
+</html>
