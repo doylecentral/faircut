@@ -7,21 +7,25 @@
 
 <body>
 
-<div ng-app="myApp" ng-controller="myCtrl" ng-init="size=12; price=10">
+<div ng-app="myApp" ng-controller="myCtrl" ng-init="size=12; price=10; eaters=2">
     <p>{{firstName}}</p>
     <p>Size of the Pizza:</p>
     <p>Size:  <input type="text" ng-model="size" value="size"></p>
     <p>Price: <input type="text" ng-model="price" value="price"></p>
+    <p>People Eating: <input type="text" ng-model="eaters" value="eaters"></p>
 
-    <p>Area: {{ Math.pow(5 ,2) * Math.PI }}</p>
-    <p>Cost Per sqare inch </p> {{price / (Math.pow(5 ,2) * Math.PI ) }}
+    <p>Area: {{ calc(size) | number:3 }}, Per Person: {{calc(size) / eaters | number:3}}</p>
+    <p>Cost Per sqare inch </p> {{price / calc(size) | number:3 }} </p>
+    <p>Cost Per Person: {{price / eaters | number:2 }}</p>
 
 </div>
 
 <script>
     var app = angular.module("myApp", []);
     app.controller("myCtrl", function($scope) {
-        $scope.Math = window.Math
+        $scope.calc = function(size){
+            return Math.pow(size / 2 ,2) * Math.PI;
+        }
     });
 </script>
 
