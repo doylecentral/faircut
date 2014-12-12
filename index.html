@@ -2,29 +2,78 @@
 <html>
 
 <head>
-    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 </head>
 
 <body>
 
 <div ng-app="myApp" ng-controller="myCtrl" ng-init="size=12; price=10; eaters=2">
-    <p>{{firstName}}</p>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Size</th>
+            <th>Price</th>
+            <th>Persons</th>
+            <th>Total Area</th>
+            <th>Area Per Person</th>
+            <th>Cost Per Sq</th>
+            <th>Cost Per Person</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- <tr ng-repeat="user in users"> -->
+        <!--
+    <td>
+        <button class="btn" ng-click="editUser(user.id)">
+            <span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
+        </button>
+    </td>
+        -->
+        <tr id="yo">
+            <td><input type="text" ng-model="size" value="size"></td>
+            <td><input type="text" ng-model="price" value="price"></td>
+            <td><input type="text" ng-model="eaters" value="eaters"></td>
+
+
+            <td>{{ calc(size) | number:3 }}</td>
+            <td>{{calc(size) / eaters | number:3}}</td>
+            <td>{{price / calc(size) | number:3 }}</td>
+            <td>{{price / eaters | number:2 }}</td>
+            <td><a class="btn" style="margin-bottom: 27px;" href="#" tooltip="Add" ng-click='addRow()'>
+                <i class="glyphicon glyphicon-plus"></i>
+            </a></td>
+        </tr>
+        </tbody>
+
+    </table>
+
     <p>Size of the Pizza:</p>
-    <p>Size:  <input type="text" ng-model="size" value="size"></p>
+
+    <p>Size: <input type="text" ng-model="size" value="size"></p>
+
     <p>Price: <input type="text" ng-model="price" value="price"></p>
+
     <p>People Eating: <input type="text" ng-model="eaters" value="eaters"></p>
 
     <p>Area: {{ calc(size) | number:3 }}, Per Person: {{calc(size) / eaters | number:3}}</p>
-    <p>Cost Per sqare inch </p> {{price / calc(size) | number:3 }} </p>
+
+    <p>Cost Per square inch </p> {{price / calc(size) | number:3 }} </p>
     <p>Cost Per Person: {{price / eaters | number:2 }}</p>
 
 </div>
 
 <script>
     var app = angular.module("myApp", []);
-    app.controller("myCtrl", function($scope) {
-        $scope.calc = function(size){
-            return Math.pow(size / 2 ,2) * Math.PI;
+    app.controller("myCtrl", function ($scope) {
+        $scope.calc = function (size) {
+            return Math.pow(size / 2, 2) * Math.PI;
+        },
+        $scope.addRow = function () {
+            console.log("Hey: " + this.id);
+            $scope.items.push($scope.newitem);
+            console.log('+ clicked');
         }
     });
 </script>
